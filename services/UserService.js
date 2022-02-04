@@ -71,9 +71,12 @@ class UserService {
     return {
       user: {
         id: user.id,
+        status: user.status,
         name: user.name,
+        surname: user.surname,
         email: user.email,
         roles: user.roles,
+        avatar: user.avatar,
       },
       tokens,
     };
@@ -85,6 +88,21 @@ class UserService {
   }
 
   async activate() {}
+
+  async current(user_id) {
+    const user = await User.findOne({ _id: user_id });
+    return {
+      user: {
+        id: user.id,
+        status: user.status,
+        name: user.name,
+        surname: user.surname,
+        email: user.email,
+        roles: user.roles,
+        avatar: user.avatar,
+      },
+    };
+  }
 
   async refresh(refreshToken) {
     if (!refreshToken) {
@@ -105,7 +123,6 @@ class UserService {
         status: user.status,
         name: user.name,
         surname: user.surname,
-        username: user.username,
         email: user.email,
         roles: user.roles,
         avatar: user.avatar,

@@ -10,16 +10,11 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors({ credentials: true, origin: "http://192.168.1.37:8080" }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(fileupload());
-app.use(
-  cors({
-    credentials: true,
-    origin: "http://localhost:8080",
-  })
-);
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 const options = {
   dotfiles: "ignore",
   etag: false,

@@ -1,5 +1,4 @@
 import UserService from "../services/UserService.js";
-import FileService from "../services/FileService.js";
 import User from "../models/User.js";
 
 class UserController {
@@ -100,11 +99,8 @@ class UserController {
 
   async current(req, res) {
     try {
-      console.log("UserController CURRENT");
-      const user = await User.findOne({ _id: req.user.id });
-      console.log(user);
-      res.status(200).json({ code: "user-current", data: user });
-      console.log(user);
+      const user = await UserService.current(req.user.id);
+      return res.status(200).json({ code: "user-current", data: user });
     } catch (error) {
       console.log("UserController CURRENT ERROR ", error);
       res.status(400).json(error);
